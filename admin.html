@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - PREMIUM IP</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal active">
+        <div class="modal-content">
+            <div class="login-container">
+                <div class="login-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>Admin Login</h2>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div id="login-error" class="error-message" style="display: none;">
+                    Invalid username or password
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <i class="fas fa-shield-alt"></i>
+                <span>PREMIUM IP Admin</span>
+            </div>
+            <div class="header-right">
+                <span class="welcome-text">Welcome, Admin</span>
+                <button id="logout-btn" class="btn btn-outline">Logout</button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="proxies">
+                    <i class="fas fa-server"></i>
+                    <span>Manage Proxies</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="blogs">
+                    <i class="fas fa-blog"></i>
+                    <span>Manage Blogs</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="analytics">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Proxy Management Tab -->
+            <div id="proxies-tab" class="tab-content active">
+                <div class="content-header">
+                    <h1>Manage Proxies</h1>
+                    <button id="add-proxy-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Proxy
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="total-proxies-stat">0</span>
+                            <span class="stat-label">Total Proxies</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="countries-stat">0</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="fast-proxies-stat">0</span>
+                            <span class="stat-label">Fast Proxies</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>IP Address</th>
+                                <th>Port</th>
+                                <th>Country</th>
+                                <th>Protocol</th>
+                                <th>Speed</th>
+                                <th>Uptime</th>
+                                <th>Anonymity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-proxy-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Blog Management Tab -->
+            <div id="blogs-tab" class="tab-content">
+                <div class="content-header">
+                    <h1>Manage Blogs</h1>
+                    <button id="add-blog-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Blog
+                    </button>
+                </div>
+
+                <div class="blog-list">
+                    <div class="blog-item">
+                        <div class="blog-info">
+                            <h3>Understanding Proxy Anonymity Levels</h3>
+                            <p>Security • Jan 15, 2025</p>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="btn btn-small btn-outline">Edit</button>
+                            <button class="btn btn-small btn-danger">Delete</button>
+                        </div>
+                    </div>
+                    <div class="blog-item">
+                        <div class="blog-info">
+                            <h3>HTTP vs HTTPS vs SOCKS Proxies Explained</h3>
+                            <p>Technology • Jan 12, 2025</p>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="btn btn-small btn-outline">Edit</button>
+                            <button class="btn btn-small btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics-tab" class="tab-content">
+                <div class="content-header">
+                    <h1>Analytics</h1>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Popular Countries</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-pie"></i>
+                            <p>Chart visualization would go here</p>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Protocol Usage</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Chart visualization would go here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Proxy Modal -->
+    <div id="proxy-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="proxy-modal-title">Add New Proxy</h3>
+                <button class="close-btn" id="close-proxy-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="proxy-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proxy-ip">IP Address</label>
+                        <input type="text" id="proxy-ip" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proxy-port">Port</label>
+                        <input type="text" id="proxy-port" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proxy-country">Country</label>
+                        <input type="text" id="proxy-country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proxy-country-code">Country Code</label>
+                        <input type="text" id="proxy-country-code" placeholder="US" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proxy-protocol">Protocol</label>
+                        <select id="proxy-protocol" required>
+                            <option value="">Select Protocol</option>
+                            <option value="HTTP">HTTP</option>
+                            <option value="HTTPS">HTTPS</option>
+                            <option value="SOCKS4">SOCKS4</option>
+                            <option value="SOCKS5">SOCKS5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="proxy-speed">Speed</label>
+                        <select id="proxy-speed" required>
+                            <option value="">Select Speed</option>
+                            <option value="Fast">Fast</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Slow">Slow</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proxy-uptime">Uptime (%)</label>
+                        <input type="number" id="proxy-uptime" min="0" max="100" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proxy-anonymity">Anonymity</label>
+                        <select id="proxy-anonymity" required>
+                            <option value="">Select Anonymity</option>
+                            <option value="Elite">Elite</option>
+                            <option value="Anonymous">Anonymous</option>
+                            <option value="Transparent">Transparent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-proxy">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Proxy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Blog Modal -->
+    <div id="blog-modal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="blog-modal-title">Add New Blog Post</h3>
+                <button class="close-btn" id="close-blog-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="blog-form">
+                <div class="form-group">
+                    <label for="blog-title">Title</label>
+                    <input type="text" id="blog-title" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="blog-category">Category</label>
+                        <select id="blog-category" required>
+                            <option value="">Select Category</option>
+                            <option value="Security">Security</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Performance">Performance</option>
+                            <option value="News">News</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="blog-read-time">Read Time (minutes)</label>
+                        <input type="number" id="blog-read-time" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="blog-excerpt">Excerpt</label>
+                    <textarea id="blog-excerpt" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="blog-content">Content</label>
+                    <textarea id="blog-content" rows="10" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-blog">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Publish Blog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
